@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'quote.dart';
 import 'quote_card.dart';
 
@@ -14,7 +15,6 @@ class QuoteList extends StatefulWidget {
 }
 
 class _QuoteListState extends State<QuoteList> {
-
   List<Quote> quotes = [
     Quote(
         text: 'Oscar Wilde',
@@ -37,7 +37,16 @@ class _QuoteListState extends State<QuoteList> {
         backgroundColor: Colors.redAccent,
       ),
       body: Column(
-        children: quotes.map((quote) => QuoteCard(quote)).toList(),
+        children: quotes
+            .map((quote) => QuoteCard(
+                  quote: quote,
+                  delete: () {
+                    setState(() {
+                      quotes.remove(quote);
+                    });
+                  },
+                ))
+            .toList(),
       ),
     );
   }
